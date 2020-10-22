@@ -53,8 +53,37 @@ public class Camera implements ICamera{
 
     @Override
     public int[] getFaceArea(char[][] face) {
-        //TODO implement getFaceArea method
-        return new int[0];
+        int x1 = -1, x2 = -1, y1 = -1, y2 = -1;
+
+        //Find the first +
+        boolean found = false;
+        for(int i = 0; i<face.length; i++){
+            for (int j = 0; j < face[i].length; j++) {
+                if(face[i][j] == '+'){
+                    x1 = i;
+                    y1 = j+1;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) break;
+        }
+
+        //Find the last +
+        found = false;
+        for (int i = face.length-1; i > 0; i--) {
+            for(int j = face[i].length-1; j > 0; j--){
+                if(face[i][j] == '+'){
+                    x2 = i;
+                    y2 = j-1;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) break;
+        }
+
+        return new int[]{x1, y1, x2, y2};
     }
 
     @Override
