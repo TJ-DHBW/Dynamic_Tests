@@ -44,6 +44,7 @@ public class Camera implements ICamera{
                 rawFace[counter] = line.toCharArray();
                 counter++;
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,6 +102,23 @@ public class Camera implements ICamera{
         return facePicture;
     }
 
+    //region Getter
+    public boolean isOn() {
+        return isOn;
+    }
+
+    public IRLed[] getIrLeds() {
+        return irLeds;
+    }
+
+    public MemoryCard getMemoryCard() {
+        return memoryCard;
+    }
+
+    public Chip[] getChips() {
+        return chips;
+    }
+    //endregion
 
     public static class Builder{
         private final MemoryCard memoryCard;

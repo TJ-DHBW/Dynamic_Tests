@@ -6,4 +6,8 @@ public class MemoryCard {
     public void store(Picture picture){
         store.push(picture);
     }
+
+    public Stack<Picture> getStore() {
+        return store;
+    }
 }

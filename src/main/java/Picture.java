@@ -11,4 +11,8 @@ public class Picture {
         this.content = content;
         this.nanoTimeStamp = LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(1));
     }
+
+    public char[][] getContent() {
+        return content;
+    }
 }
