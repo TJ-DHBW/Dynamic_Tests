@@ -1,20 +1,31 @@
+import java.util.UUID;
+
 public class Camera implements ICamera{
     private String serialNumber;
     private boolean isOn;
+    private IRLed[] irLeds;
+    private MemoryCard memoryCard;
+    private Chip[] chips;
 
-    protected Camera(){
-        //TODO implement constructor for camera
+
+    protected Camera(IRLed[] irLeds, MemoryCard memoryCard, Chip[] chips){
+        this.serialNumber = UUID.randomUUID().toString();
+        this.isOn = false;
+
+        this.irLeds = irLeds;
+        this.memoryCard = memoryCard;
+        this.chips = chips;
     }
 
 
     @Override
     public void on() {
-        //TODO implement on method
+        isOn = true;
     }
 
     @Override
     public void off() {
-        //TODO implement off method
+        isOn = false;
     }
 
     @Override
@@ -37,6 +48,19 @@ public class Camera implements ICamera{
 
 
     public static class Builder{
-        //TODO implement Builder for Camera
+        private final MemoryCard memoryCard;
+
+        Builder(MemoryCard memoryCard){
+            this.memoryCard = memoryCard;
+        }
+
+        public Camera build(){
+            IRLed[] irLeds = new IRLed[24];
+            for(int i = 0; i<irLeds.length; i++){
+                irLeds[i] = new IRLed();
+            }
+
+            return new Camera(irLeds, memoryCard, new Chip[]{new Chip(), new Chip()});
+        }
     }
 }
