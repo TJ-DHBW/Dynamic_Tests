@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.UUID;
 
 public class Camera implements ICamera{
@@ -30,8 +31,24 @@ public class Camera implements ICamera{
 
     @Override
     public char[][] getRawFacePicture(int faceID) {
-        //TODO implement getRawFacePicture method
-        return new char[0][];
+        String idString = (faceID<10) ? "0" + faceID : faceID + "";
+
+        char[][] rawFace = new char[21][];
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/resources/face" + idString + ".txt")));
+
+            String line;
+            int counter = 0;
+            while((line = reader.readLine()) != null){
+                rawFace[counter] = line.toCharArray();
+                counter++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return rawFace;
     }
 
     @Override
