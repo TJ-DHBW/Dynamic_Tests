@@ -88,8 +88,17 @@ public class Camera implements ICamera{
 
     @Override
     public Picture extractFace(int id, char[][] face, int[] area) {
-        //TODO implement extractFace method
-        return null;
+        char[][] onlyFace = new char[area[2]-area[0]+1][area[3]-area[1]+1];
+
+        for(int i = area[0]; i <= area[2]; i++){
+            if (area[3] + 1 - area[1] >= 0)
+                System.arraycopy(face[i], area[1], onlyFace[i - area[0]], 0, area[3] + 1 - area[1]);
+        }
+
+        Picture facePicture = new Picture(id, onlyFace);
+        memoryCard.store(facePicture);
+
+        return facePicture;
     }
 
 
